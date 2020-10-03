@@ -8,7 +8,7 @@
 class Keyblade{
 private:
 	Keyb* keys;
-	int num_keys=40;
+	int num_keys=43;
 
 
 public:

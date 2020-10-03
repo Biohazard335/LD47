@@ -39,6 +39,8 @@ void Imagehandler::load(){
 	Tilemap::add_tileset("../assets/image/tilesets/default_tileset_buffer","default_tileset");
 
 	load_animation_sheet("../assets/image/animations/default_player");
+	load_animation_sheet("../assets/image/animations/circle_animations");
+	load_animation_sheet("../assets/image/animations/bullets");
 }
 
 void Imagehandler::load_text_input_box(Text_Input_Box& tib){

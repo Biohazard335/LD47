@@ -1,0 +1,6 @@
+bullet_burst0:78x45,1r4c,4f
+bullet_flying0:73x45,1r1c,1f
+bullet_burst1:78x45,1r4c,4f
+bullet_flying1:73x45,1r1c,1f
+bullet_burst2:78x45,1r4c,4f
+bullet_flying2:73x45,1r1c,1f

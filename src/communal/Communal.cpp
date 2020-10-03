@@ -23,6 +23,10 @@ double sin_degrees(double theta){
 	return sin(theta*PI/180);
 }
 
+double atan2_degrees(double y_p,double x_p){
+	return atan2(y_p,x_p)*180/PI;
+}
+
 
 int extract_next_int_from_string(int start_index_p,std::string string_p){
 	int found_index=-1;

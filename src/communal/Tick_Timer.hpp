@@ -10,6 +10,8 @@ public:
 	Tick_Timer(){}
 	Tick_Timer(int max_p){max=max_p;current=max;}
 
+	void create(int max_p){max=max_p;current=max_p;}
+
 	void restart(){
 		current=max;
 		paused=false;
@@ -22,7 +24,7 @@ public:
 			if(current==0){
 				return true;
 			}else{
-				current--
+				current--;
 			}
 		}
 		return false;
@@ -33,7 +35,7 @@ public:
 				current=max;
 				return true;
 			}else{
-				current--
+				current--;
 			}
 		}
 		return false;

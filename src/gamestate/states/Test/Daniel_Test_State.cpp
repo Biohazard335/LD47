@@ -3,11 +3,18 @@
 
 
 Daniel_Test_State::Daniel_Test_State(Imagehandler& imagehandler,Audiohandler& audiohandler):test_layer("test_layer"){
-	state_name="Daniel_test_state";
+	state_name="daniel_test_state";
 	load_sprites(imagehandler);
+
+	player.create(Point(500,500),16);
+	other.create(Point(600,600),16);
+	enemy_spawn_timer.create(10);
 }
 
 void Daniel_Test_State::load_sprites(Imagehandler& imagehandler){
+	player.load_animations(imagehandler);
+	other.load_animations(imagehandler);
+	bullet_manager.load_animations(imagehandler);
 }
 
 void Daniel_Test_State::update_layer_resolutions(){
@@ -19,6 +26,27 @@ void Daniel_Test_State::update(Mousey& mouse,Keyblade& keyboard,Gamepad& gamepad
 	Gamestate::update_gui_layer(mouse,keyboard,gamepad);
 
 	mouse.set_layer(test_layer);
+
+
+	if(enemy_spawn_timer.do_timer_loop()){
+		std::vector<Bullet_Blueprint> temp;
+		int r=random(0,2);
+		if(r==2){
+			temp.push_back(Bullet_Blueprint(LINEAR,5,Point(-6,random(-6,6)),Point(1200,random(50,700)),1));
+		}if(r==1){
+			temp.push_back(Bullet_Blueprint(HOMING,5,Point(-6,random(-6,6)),Point(1200,random(50,700)),1));
+		}if(r==0){
+			temp.push_back(Bullet_Blueprint(SINE,5,Point(-6,random(-6,6)),Point(1200,random(50,700)),1));
+		}
+		bullet_manager.add_bullets(temp);
+	}
+
+	player.update(other,keyboard,gamepad);
+	Bullet_Vector bullets_hitting_player=bullet_manager.bullets_colliding_with_hitbox(player.get_hitbox());
+	for(int i=0;i<(int)bullets_hitting_player.size();i++){
+		bullets_hitting_player.at(i)->set_exploding(true);
+	}
+	bullet_manager.update();
 
 	check_gamepad(gamepad);
 	check_keyboard(keyboard);
@@ -36,6 +64,10 @@ void Daniel_Test_State::render(sf::RenderWindow& window){Duration_Check::start("
 
 	Gamestate::render_background_layer(window);
 	window.setView(test_layer);
+	window.draw(player);
+	window.draw(other);
+	//window.draw(linear_bullet);
+	window.draw(bullet_manager);
 	Gamestate::render_gui_layer(window);
 Duration_Check::stop("-Platformer render");}
 

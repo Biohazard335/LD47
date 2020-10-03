@@ -7,6 +7,7 @@ private:
 	char key_c;
 	sf::Keyboard::Key key_k;
 	bool just_pressed=false;
+	bool just_released=false;
 	bool pressed=false;
 	bool held=false;
 public:
@@ -16,10 +17,15 @@ public:
 		pressed=b_p;
 		just_pressed=b_p;
 	}
+	void update_released(bool b_p){
+		just_released=b_p;
+	}
 	void update_jp(){
 		just_pressed=false;
+		just_released=false;
 	}
 	bool was_just_pressed(){return just_pressed;}
+	bool was_just_released(){return just_released;}
 	bool is_pressed(){return pressed;}
 	char get_key_c(){return key_c;}
 	sf::Keyboard::Key get_key_k(){return key_k;}

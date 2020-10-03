@@ -1,0 +1,3 @@
+green_circle:32x32,1r1c,1f
+red_circle:32x32,1r1c,1f
+blue_circle:32x32,1r1c,1f

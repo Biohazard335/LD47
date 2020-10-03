@@ -1,0 +1,3 @@
+linear_bullet:10x10,1r1c,1f
+sine_bullet:10x10,1r1c,1f
+homing_bullet:10x10,1r1c,1f

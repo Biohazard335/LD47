@@ -1,0 +1,1 @@
+Projectile_2_idle:64x64,1r1c,1f

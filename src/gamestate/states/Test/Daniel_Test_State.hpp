@@ -4,16 +4,22 @@
 #include "../../Gamestate.hpp"
 #include "../../../tilemap/Tilemap.hpp"
 #include "../../../audio/Audiohandler.hpp"
-#include "../../../entity/Platformer_Controller.hpp"
+#include "../../../entity/Circle_Player.hpp"
+#include "../../../entity/Bullet/Bullet_Manager.hpp"
+#include "../../../entity/Bullet/Linear_Bullet.hpp"
+#include "../../../communal/Tick_Timer.hpp"
 
 class Daniel_Test_State:public Gamestate{
 private:
 
 	Layer test_layer;
 
-	Tilemap platform_map;
+	Circle_Player player;
+	Circle_Player other;
 
-	Platformer_Controller player;
+	Bullet_Manager bullet_manager;
+	Tick_Timer enemy_spawn_timer;
+
 
 public:
 	Daniel_Test_State(Imagehandler& imagehandler,Audiohandler& audiohandler);

@@ -71,6 +71,12 @@ public:
 		}
 	}
 
+	void scale(Point scale){
+		for(int i=0;i<number_of_frames;i++){
+			sprites[i].scale(scale.get_x(),scale.get_y());
+		}
+	}
+
 	void set_h_mirror(bool b_p);
 
 	void animate();

@@ -14,15 +14,21 @@ Keyblade::Keyblade(){
 	keys[37]=Keyb('B',sf::Keyboard::BackSpace);
 	keys[38]=Keyb(' ',sf::Keyboard::Space);
 	keys[39]=Keyb('\n',sf::Keyboard::Return);
+	keys[40]=Keyb('^',sf::Keyboard::LShift);
+	keys[41]=Keyb('\t',sf::Keyboard::Tab);
+	keys[42]=Keyb('@',sf::Keyboard::LControl);
 }
 
 void Keyblade::event_update(sf::Event& event){
-	bool pressed=true;
+	bool pressed=false;
+	bool released=false;
 	for(int i=0;i<num_keys;i++){
 		if(event.key.code==keys[i].get_key_k()){
 			(event.type==sf::Event::KeyPressed)?pressed=true:pressed=false;
+			(event.type==sf::Event::KeyReleased)?released=true:released=false;
 			//std::cout<<keys[i].get_key_c()<<pressed<<std::endl;
 			keys[i].update(pressed);
+			keys[i].update_released(released);
 		}
 	}
 }

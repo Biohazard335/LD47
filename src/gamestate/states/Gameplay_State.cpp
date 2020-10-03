@@ -13,6 +13,7 @@ Gameplay_State::Gameplay_State(Imagehandler& imagehandler,Audiohandler& audiohan
 void Gameplay_State::load_sprites(Imagehandler& imagehandler){
 	imagehandler.load_sprite(background,"core_game_background");
 	player.load_animations(imagehandler);
+	
 }
 
 void Gameplay_State::update_layer_resolutions(){

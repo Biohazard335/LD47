@@ -1,19 +1,20 @@
 #ifndef POINT_HPP
 #define POINT_HPP
+#include <math.h>
 
 class Point{
 private:
-	int x;
-	int y;
+	float x;
+	float y;
 public:
 	Point(){};
-	Point(int x_p, int y_p):x(x_p),y(y_p){}
+	Point(float x_p, float y_p):x(x_p),y(y_p){}
 
 	Point operator +(Point p_p){return Point(x+p_p.get_x(),y+p_p.get_y());}
 	Point operator -(Point p_p){return Point(x-p_p.get_x(),y-p_p.get_y());}
-	Point operator *(int i_p){return Point(x*i_p,y*i_p);}
-	Point operator /(int i_p){return Point(x/i_p,y/i_p);}
-	Point operator *=(int d_p) { return Point(x *= d_p, y *= d_p); }
+	Point operator *(float i_p){return Point(x*i_p,y*i_p);}
+	Point operator /(float i_p){return Point(x/i_p,y/i_p);}
+	Point operator *=(float d_p) { return Point(x *= d_p, y *= d_p); }
 	Point operator +=(Point p_p) { return Point(x += p_p.get_x(), y += p_p.get_y()); }
 	Point operator =(Point p_p) { return Point(x = p_p.get_x(), y = p_p.get_y()); }
 
@@ -27,14 +28,20 @@ public:
 		else return false;
 	}
 
-	int get_x(){return x;}
-	int get_y(){return y;}
-	void set_x(int x_p){x=x_p;}
-	void set_y(int y_p){y=y_p;}
-	void set_point(int x_p, int y_p){set_x(x_p);set_y(y_p);}
+	void normalize(){
+		float length=sqrt(x*x+y*y);
+		x=x/length;
+		y=y/length;
+	}
+
+	float get_x(){return x;}
+	float get_y(){return y;}
+	void set_x(float x_p){x=x_p;}
+	void set_y(float y_p){y=y_p;}
+	void set_point(float x_p, float y_p){set_x(x_p);set_y(y_p);}
 	void set_point(Point new_p){set_x(new_p.get_x());set_y(new_p.get_y());}
 
-	void move(int x_p, int y_p){x+=x_p;y+=y_p;}
+	void move(float x_p, float y_p){x+=x_p;y+=y_p;}
 	void move(Point p_p){x+=p_p.get_x();y+=p_p.get_y();}
 };
 
