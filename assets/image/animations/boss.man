@@ -1,0 +1,3 @@
+boss_body:308x464,1r1c,1f
+boss_west:200x414,1r1c,1f
+boss_east:242x412,1r1c,1f

@@ -57,8 +57,8 @@ void Slider::set_font(sf::Font& font){
 	display_value.setFont(font);
 
 	display_name.setString(name);
-	display_name.setFillColor(font_color);
-	display_name.setOutlineColor(sf::Color::Black);
+	display_name.setFillColor(sf::Color::White);
+	display_name.setOutlineColor(sf::Color::White);
 	display_name.setOutlineThickness(1.0f);
 	display_name.setCharacterSize(23);
 
@@ -79,8 +79,8 @@ void Slider::set_font(sf::Font& font){
 	display_name.setPosition(name_origin,origin_y-11);
 
 	display_value.setString(std::to_string((int)value));
-	display_value.setFillColor(font_color);
-	display_value.setOutlineColor(sf::Color::Black);
+	display_value.setFillColor(sf::Color::White);
+	display_value.setOutlineColor(sf::Color::White);
 	display_value.setOutlineThickness(1.0f);
 	display_value.setCharacterSize(23);
 	display_value.setPosition(origin_x+bar_width+display_value_distance,origin_y-11);

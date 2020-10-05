@@ -10,7 +10,6 @@
 #include "../gui/Text_Input_Box.hpp"
 #include "../gui/Slider.hpp"
 
-
 class Imagehandler{
 private:
 	std::vector<std::unique_ptr<Animation_Sheet>> animation_sheets;
@@ -21,8 +20,10 @@ private:
 	sf::Texture menu_background;
 	sf::Texture core_game_background;
 
-	sf::Texture lizerd;
-	sf::Texture hotbar;
+	sf::Texture game_title;
+	sf::Texture panel;
+	sf::Texture o;
+	sf::Texture panelx;
 
 	sf::Texture text_input_box;
 	sf::Texture text_input_cursor;
@@ -33,7 +34,6 @@ private:
 	Sprite_Sheet checkbox;
 
 	sf::Font font;
-
 
 public:
 	Imagehandler();
@@ -52,8 +52,6 @@ public:
 	void load_sf_text(sf::Text& text);
 
 	void load_animation_sheet(std::string file_p);
-
-
 };
 
 #endif

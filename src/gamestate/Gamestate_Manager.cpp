@@ -10,6 +10,7 @@ Gamestate_Manager::Gamestate_Manager(){
 	andrew_test_state= new Andrew_Test_State(imagehandler,audiohandler);
 	daniel_test_state= new Daniel_Test_State(imagehandler,audiohandler);
 	horus_test_state= new Horus_Test_State(imagehandler,audiohandler);
+	death_state= new Death_State(imagehandler);
 	
 	gamepad.set_button_mode(true);
 	gamepad.set_current_layer("gui");
@@ -34,6 +35,7 @@ void Gamestate_Manager::update_layer_resolutions(){
 	andrew_test_state->update_layer_resolutions();
 	daniel_test_state->update_layer_resolutions();
 	horus_test_state->update_layer_resolutions();
+	death_state->update_layer_resolutions();
 }
 
 bool Gamestate_Manager::set_state(Data_Packet data){
@@ -62,10 +64,15 @@ bool Gamestate_Manager::set_state(Data_Packet data){
 			gamepad.set_button_mode(true);
 			gamepad.set_current_layer("gui");
 			current_state=main_menu_state;
+			reset_game();
 		}else if(state=="pause_menu"){
 			gamepad.set_button_mode(true);
 			gamepad.set_current_layer("gui");
 			current_state=pause_menu_state;
+		}else if(state=="death_state"){
+			gamepad.set_button_mode(true);
+			gamepad.set_current_layer("gui");
+			current_state=death_state;
 		}else if(state=="options_menu"){
 			gamepad.set_button_mode(true);
 			gamepad.set_current_layer("gui");
@@ -86,6 +93,8 @@ void Gamestate_Manager::receive_data(Data_Packet data_p){
 		}else if(data_p.get_interaction_level()==MANAGER){
 			if(data_p.get_data_type()=="set_state"){
 				set_state(data_p);
+			}else if(data_p.get_data_type()=="reset"){
+				reset_game();
 			}else{
 				std::cout<<"ERROR: manager recieved invalid data: "<<data_p.get_data_type()<<std::endl;
 			}
@@ -116,6 +125,10 @@ void Gamestate_Manager::update(sf::RenderWindow& window){
 	sf::Event event;
 
 	while(window.pollEvent(event)){
+
+		if(event.type==sf::Event::Closed){
+			send_data.push_back(Data_Packet("close",WINDOW));
+		}
 		if(event.type==sf::Event::KeyPressed ||event.type==sf::Event::KeyReleased){
 			keyboard.event_update(event);
 		}else if(event.type==sf::Event::JoystickButtonPressed||event.type==sf::Event::JoystickButtonReleased

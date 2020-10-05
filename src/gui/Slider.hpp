@@ -45,7 +45,7 @@ private:
 	sf::Text display_name;
 	sf::Text display_value;
 
-	sf::Color font_color=sf::Color(117,24,15,225);
+	sf::Color font_color=sf::Color::White;;
 
 	sf::Sprite bar_s;
 	sf::Sprite subdivision_s;

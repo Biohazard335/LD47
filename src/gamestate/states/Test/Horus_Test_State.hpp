@@ -6,10 +6,16 @@
 #include "../../../audio/Audiohandler.hpp"
 #include "../../../entity/Platformer_Controller.hpp"
 
+#include "../../../communal/LDUtil.hpp"
+#include "../../../entity/Player/Player.hpp"
+
 class Horus_Test_State:public Gamestate{
 private:
 
 	Layer test_layer;
+
+    World_Data world;
+    Player p_test;
 
 public:
 	Horus_Test_State(Imagehandler& imagehandler,Audiohandler& audiohandler);
@@ -21,8 +27,6 @@ public:
 	void execute_data(Data_Packet)override;
 	void check_keyboard(Keyblade&);
 	void check_gamepad(Gamepad&);
-
-
 };
 
 

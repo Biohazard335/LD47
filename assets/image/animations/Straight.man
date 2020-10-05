@@ -1,0 +1,3 @@
+Straight_Idle:445x340,1r1c,1f
+Straight_Build:445x340,1r5c,5f
+Straight_Die:445x340,1r5c,5f

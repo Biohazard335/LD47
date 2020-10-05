@@ -11,6 +11,10 @@ void Imagehandler::load(){
 	error_texture.setSmooth(true);
 	error_animation.load("../assets/error/error_animation.png",32,32,4,0,"error");
 
+	game_title.loadFromFile("../assets/image/Title.png");
+	panel.loadFromFile("../assets/image/panel.png");
+	panelx.loadFromFile("../assets/image/panelxbox.png");
+	o.loadFromFile("../assets/image/o.png");
 
 	menu_background.loadFromFile("../assets/image/menu_background.png");
 	menu_background.setSmooth(true);
@@ -22,7 +26,7 @@ void Imagehandler::load(){
 
 	slider_sheet.load("../assets/gui/slider_sheet.png",-1,-1,-1,-1,"slider_sheet");
 
-	text_buttons.load("../assets/gui/text_buttons.png",150,40,2,1,"text_buttons");
+	text_buttons.load("../assets/gui/text_buttons.png",250,51,2,1,"text_buttons");
 	checkbox.load("../assets/gui/checkbox.png",40,40,3,1,"checkbox");
 	checkbox.set_button_sheet(true);
 
@@ -41,6 +45,17 @@ void Imagehandler::load(){
 	load_animation_sheet("../assets/image/animations/default_player");
 	load_animation_sheet("../assets/image/animations/circle_animations");
 	load_animation_sheet("../assets/image/animations/bullets");
+	load_animation_sheet("../assets/image/animations/Straight");
+	load_animation_sheet("../assets/image/animations/Burst");
+	load_animation_sheet("../assets/image/animations/Sine");
+	load_animation_sheet("../assets/image/animations/Fish");
+	load_animation_sheet("../assets/image/animations/Player_Core");
+    load_animation_sheet("../assets/image/animations/Player_Bod");
+    load_animation_sheet("../assets/image/animations/UI_Anims/health");
+    load_animation_sheet("../assets/image/animations/UI_Anims/LineBar");
+    load_animation_sheet("../assets/image/animations/UI_Anims/panel");
+    load_animation_sheet("../assets/image/animations/UI_Anims/panelxbox");
+	load_animation_sheet("../assets/image/animations/boss");
 }
 
 void Imagehandler::load_text_input_box(Text_Input_Box& tib){
@@ -60,10 +75,14 @@ void Imagehandler::load_sprite(sf::Sprite& sprite, std::string name_p){
 		sprite.setTexture(core_game_background,true);
 	}else if(name_p=="options_menu_background"){
 		sprite.setTexture(menu_background,true);
-	}else if(name_p=="lizerd"){
-		sprite.setTexture(lizerd,true);
-	}else if(name_p=="hotbar"){
-		sprite.setTexture(hotbar,true);
+	}else if(name_p=="game_title"){
+		sprite.setTexture(game_title,true);
+	}else if(name_p=="panel"){
+		sprite.setTexture(panel,true);
+	}else if(name_p=="panelx"){
+		sprite.setTexture(panelx,true);
+	}else if(name_p=="o"){
+		sprite.setTexture(o,true);
 	}
 	else{
 		std::cout<<"\nERROR: sprite not found: "<<name_p<<std::endl;

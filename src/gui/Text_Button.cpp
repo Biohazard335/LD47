@@ -12,9 +12,9 @@ Text_Button::Text_Button(std::string name_p, int x_p, int y_p, Data_Packet data_
 	data=data_p;
 	interaction_level=data.get_interaction_level();
 
-	display_text.setCharacterSize(23);
-	display_text.setFillColor(text_off_color);
-	display_text.setOutlineColor(sf::Color::Black);
+	display_text.setCharacterSize(25);
+	display_text.setFillColor(sf::Color::White);
+	display_text.setOutlineColor(sf::Color::White);
 	display_text.setOutlineThickness(1.0f);
 	display_text.setString(name);
 

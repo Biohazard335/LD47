@@ -13,9 +13,9 @@ private:
 	sf::Sprite s_off;
 	sf::Sprite s_highlighted; 
 
-	sf::Color text_on_color=sf::Color::Green;
-	sf::Color text_off_color=sf::Color(117,24,15,225);
-	sf::Color text_highlighted_color=sf::Color(242,30,10,225);
+	sf::Color text_on_color=sf::Color::White;
+	sf::Color text_off_color=sf::Color::White;;
+	sf::Color text_highlighted_color=sf::Color::White;;
 public:
 
 	void draw(sf::RenderWindow& window)override;

@@ -10,6 +10,7 @@
 #include "states/Test/Horus_Test_State.hpp"
 #include "states/Test/Daniel_Test_State.hpp"
 #include "states/Pause_Menu_State.hpp"
+#include "states/Death_State.hpp"
 #include "../audio/Audiohandler.hpp"
 #include "../input/Gamepad.hpp"
 
@@ -24,6 +25,7 @@ private:
 	Andrew_Test_State* andrew_test_state;
 	Horus_Test_State* horus_test_state;
 	Daniel_Test_State* daniel_test_state;
+	Death_State* death_state;
 
 	Imagehandler imagehandler;
 	Audiohandler audiohandler;
@@ -52,7 +54,7 @@ public:
 		delete daniel_test_state;
 		delete andrew_test_state;
 		delete horus_test_state;
-
+		delete death_state;
 	}
 
 	Data_Packet get_send_data(){
@@ -73,6 +75,11 @@ public:
 	}
 
 	void update_layer_resolutions();
+
+	void reset_game(){
+		delete gameplay_state;
+		gameplay_state = new Gameplay_State(imagehandler,audiohandler);
+	}
 };
 
 #endif

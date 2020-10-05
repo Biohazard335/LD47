@@ -2,6 +2,7 @@
 #define Layer_HPP
 #include <SFML/Graphics/View.hpp>
 #include <string>
+#include "../entity/Point.hpp"
 
 class Layer:public sf::View{
 
@@ -55,6 +56,8 @@ public:
 	void set_original_size(int,int);
 	void set_original_center(int,int);
 	void resolve_new_resolution();
+
+	Point get_original_size(){return Point(original_size_x,original_size_y);}
 
 	double window_to_layer_x(double);
 	double window_to_layer_y(double);

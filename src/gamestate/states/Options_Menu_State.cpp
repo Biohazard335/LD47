@@ -31,13 +31,13 @@ Options_Menu_State::Options_Menu_State(Imagehandler& imagehandler):res_error_lay
 	gui_layer_buttons.at(4)->set_togglable(true);
 	gui_layer_buttons.at(4)->manually_set_on(true);
 
-	gui_layer_buttons.push_back(std::make_unique<Slider>(Slider("display_type",400,350,0,0,1,Data_Packet("display_type",LOCAL),-1,4,6,-1,							//5
+	gui_layer_buttons.push_back(std::make_unique<Slider>(Slider("display type",400,350,0,0,1,Data_Packet("display_type",LOCAL),-1,4,6,-1,							//5
 		(Slider::ALIGN_BAR | Slider::ABS_NAME_DIST | Slider::NO_VALUE))));
 	static_cast<Slider*>(gui_layer_buttons.at(5).get())->manually_set_value(0);
 
-	gui_layer_buttons.push_back(std::make_unique<Text_Button>(Text_Button("apply", 100, 400, Data_Packet("apply",LOCAL),-1,5,-1,7)));								//6
+	gui_layer_buttons.push_back(std::make_unique<Text_Button>(Text_Button("apply", 100, 500, Data_Packet("apply",LOCAL),-1,5,-1,7)));								//6
 
-	gui_layer_buttons.push_back(std::make_unique<Text_Button>(Text_Button("return", 250, 400, Data_Packet("return",LOCAL),6,5,-1,-1)));							//7
+	gui_layer_buttons.push_back(std::make_unique<Text_Button>(Text_Button("return", 500, 500, Data_Packet("return",LOCAL),6,5,-1,-1)));							//7
 
 
 
@@ -47,6 +47,7 @@ Options_Menu_State::Options_Menu_State(Imagehandler& imagehandler):res_error_lay
 	load_sprites(imagehandler);
 
 	res_error_layer.set_active(false);
+
 }
 
 void Options_Menu_State::load_sprites(Imagehandler& imagehandler){
@@ -56,21 +57,21 @@ void Options_Menu_State::load_sprites(Imagehandler& imagehandler){
 	imagehandler.load_button(&res_error_okay);
 	imagehandler.load_button(res_slider_swap.get());
 
-	imagehandler.load_sprite(background,"options_menu_background");
+	//imagehandler.load_sprite(background,"options_menu_background");
 	imagehandler.load_sprite(res_error_grey,"options_menu_background");
 
 	imagehandler.load_sf_text(title);
 	title.setCharacterSize(50);
-	title.setFillColor(sf::Color::Red);
-	title.setOutlineColor(sf::Color::Black);
+	title.setFillColor(sf::Color::White);
+	title.setOutlineColor(sf::Color::White);
 	title.setOutlineThickness(3.0f);
 	title.setString("Options");
 	title.setPosition(100,50);
 
 	imagehandler.load_sf_text(fullscreen);
 	fullscreen.setCharacterSize(23);
-	fullscreen.setFillColor(sf::Color(117,24,15,225));
-	fullscreen.setOutlineColor(sf::Color::Black);
+	fullscreen.setFillColor(sf::Color::White);
+	fullscreen.setOutlineColor(sf::Color::White);
 	fullscreen.setOutlineThickness(1.0f);
 	fullscreen.setString("fullscreen");
 	fullscreen.setPosition(100,290);
@@ -78,28 +79,33 @@ void Options_Menu_State::load_sprites(Imagehandler& imagehandler){
 
 	imagehandler.load_sf_text(display_type);
 	display_type.setCharacterSize(23);
-	display_type.setFillColor(sf::Color(117,24,15,225));
-	display_type.setOutlineColor(sf::Color::Black);
+	display_type.setFillColor(sf::Color::White);
+	display_type.setOutlineColor(sf::Color::White);
 	display_type.setOutlineThickness(1.0f);
 	display_type.setString("stretch to fit");
 	display_type.setPosition(850,340);
 
 	imagehandler.load_sf_text(resolution_text);
 	resolution_text.setCharacterSize(23);
-	resolution_text.setFillColor(sf::Color(117,24,15,225));
-	resolution_text.setOutlineColor(sf::Color::Black);
+	resolution_text.setFillColor(sf::Color::White);
+	resolution_text.setOutlineColor(sf::Color::White);
 	resolution_text.setOutlineThickness(1.0f);
 	resolution_text.setPosition(850,240);
+	int x=0;
+	int y=0;
 	if(full){
-		resolution_text.setString(to_string(fullscreen_resolutions.at(current_res_index).get_x())+"X"+to_string(fullscreen_resolutions.at(current_res_index).get_y()));
+		x=(int)fullscreen_resolutions.at(current_res_index).get_x();
+		y=(int)fullscreen_resolutions.at(current_res_index).get_y();
 	}else{
-		resolution_text.setString(to_string(windowed_resolutions.at(current_res_index).get_x())+"X"+to_string(windowed_resolutions.at(current_res_index).get_y()));
+		x=(int)windowed_resolutions.at(current_res_index).get_x();
+		y=(int)windowed_resolutions.at(current_res_index).get_y();
 	}
+	resolution_text.setString(to_string(x)+"X"+to_string(y));
 
 	imagehandler.load_sf_text(res_error_text);
 	res_error_text.setCharacterSize(20);
-	res_error_text.setFillColor(sf::Color(117,24,15,225));
-	res_error_text.setOutlineColor(sf::Color::Black);
+	res_error_text.setFillColor(sf::Color::White);
+	res_error_text.setOutlineColor(sf::Color::White);
 	res_error_text.setOutlineThickness(1.0f);
 	res_error_text.setLineSpacing(2.0f);
 	res_error_text.setString(	"\
@@ -116,8 +122,6 @@ void Options_Menu_State::load_sprites(Imagehandler& imagehandler){
 						 	this bug should not affect windowed mode.\n\n\
 						 	Apologies for the inconvenience!");
 	res_error_text.setPosition(-100,50);
-
-
 }
 
 
@@ -190,19 +194,29 @@ void Options_Menu_State:: execute_data(Data_Packet data){
 		int res_slider_index=get_gui_button_index("resolution");
 		gui_layer_buttons.at(res_slider_index).swap(res_slider_swap);
 		current_res_index=gui_layer_buttons.at(res_slider_index)->get_data().get_ints().at(0);
+		int x=0;
+		int y=0;
 		if(full){
-			resolution_text.setString(to_string(fullscreen_resolutions.at(current_res_index).get_x())+"X"+to_string(fullscreen_resolutions.at(current_res_index).get_y()));
+			x=(int)fullscreen_resolutions.at(current_res_index).get_x();
+			y=(int)fullscreen_resolutions.at(current_res_index).get_y();
 		}else{
-			resolution_text.setString(to_string(windowed_resolutions.at(current_res_index).get_x())+"X"+to_string(windowed_resolutions.at(current_res_index).get_y()));
+			x=(int)windowed_resolutions.at(current_res_index).get_x();
+			y=(int)windowed_resolutions.at(current_res_index).get_y();
 		}
+		resolution_text.setString(to_string(x)+"X"+to_string(y));
 	}
 	if(data.get_data_type()=="set_resolution"){
 		current_res_index=data.get_ints().at(0);
+		int x=0;
+		int y=0;
 		if(full){
-			resolution_text.setString(to_string(fullscreen_resolutions.at(current_res_index).get_x())+"X"+to_string(fullscreen_resolutions.at(current_res_index).get_y()));
+			x=(int)fullscreen_resolutions.at(current_res_index).get_x();
+			y=(int)fullscreen_resolutions.at(current_res_index).get_y();
 		}else{
-			resolution_text.setString(to_string(windowed_resolutions.at(current_res_index).get_x())+"X"+to_string(windowed_resolutions.at(current_res_index).get_y()));
+			x=(int)windowed_resolutions.at(current_res_index).get_x();
+			y=(int)windowed_resolutions.at(current_res_index).get_y();
 		}
+		resolution_text.setString(to_string(x)+"X"+to_string(y));
 	}
 	if(data.get_data_type()=="apply"){
 		if(current_res_index!=cri0 || full!=full0 ||display_type_i!=display_type_i0){
@@ -230,11 +244,16 @@ void Options_Menu_State:: execute_data(Data_Packet data){
 			gui_layer_buttons.at(res_slider_index).swap(res_slider_swap);
 			full=full0;
 			current_res_index=gui_layer_buttons.at(res_slider_index)->get_data().get_ints().at(0);
+			int x=0;
+			int y=0;
 			if(full){
-				resolution_text.setString(to_string(fullscreen_resolutions.at(current_res_index).get_x())+"X"+to_string(fullscreen_resolutions.at(current_res_index).get_y()));
+				x=(int)fullscreen_resolutions.at(current_res_index).get_x();
+				y=(int)fullscreen_resolutions.at(current_res_index).get_y();
 			}else{
-				resolution_text.setString(to_string(windowed_resolutions.at(current_res_index).get_x())+"X"+to_string(windowed_resolutions.at(current_res_index).get_y()));
+				x=(int)windowed_resolutions.at(current_res_index).get_x();
+				y=(int)windowed_resolutions.at(current_res_index).get_y();
 			}
+			resolution_text.setString(to_string(x)+"X"+to_string(y));
 		}
 
 		int fullscreen_index=get_gui_button_index("fullscreen");
@@ -251,16 +270,20 @@ void Options_Menu_State:: execute_data(Data_Packet data){
 		}else if(display_type_i==2){
 			display_type.setString("pixel perfect");
 		}
-		int display_type_index=get_gui_button_index("display_type");
+		int display_type_index=get_gui_button_index("display type");
 		static_cast<Slider*>(gui_layer_buttons.at(display_type_index).get())->manually_set_value(display_type_i0);
 
 		send_data.push_back(Data_Packet("set_state",MANAGER,{previous_state}));
-
+		int x=0;
+		int y=0;
 		if(full){
-			resolution_text.setString(to_string(fullscreen_resolutions.at(current_res_index).get_x())+"X"+to_string(fullscreen_resolutions.at(current_res_index).get_y()));
+			x=(int)fullscreen_resolutions.at(current_res_index).get_x();
+			y=(int)fullscreen_resolutions.at(current_res_index).get_y();
 		}else{
-			resolution_text.setString(to_string(windowed_resolutions.at(current_res_index).get_x())+"X"+to_string(windowed_resolutions.at(current_res_index).get_y()));
+			x=(int)windowed_resolutions.at(current_res_index).get_x();
+			y=(int)windowed_resolutions.at(current_res_index).get_y();
 		}
+		resolution_text.setString(to_string(x)+"X"+to_string(y));
 	}
 
 	if(data.get_data_type()=="res_error"){

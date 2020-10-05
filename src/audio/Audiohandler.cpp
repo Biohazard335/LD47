@@ -37,7 +37,10 @@ void Audiohandler::instantiate_player(){
 
 void Audiohandler::load(){
 	error_sound.loadFromFile("../assets/error/error_sound.wav");
-	background_music.openFromFile("../assets/audio/music/Ethans_song.wav");
+	background_music.openFromFile("../assets/audio/music/Whorl.wav");
+	background_music.play();
+	background_music.setLoop(true);
+	add_buffer("../assets/audio/bplayer_hit.wav","player_hit");
 }
 void Audiohandler::add_buffer(std::string file_p,std::string name_p){
 	buffers.push_back(std::make_unique<Sound_Texture>(Sound_Texture(file_p,name_p)));
@@ -54,8 +57,8 @@ void Audiohandler::load_audiokey(Audiokey& key){
 
 
 void Audiohandler::set_background_music(std::string name_p){
-	if(name_p=="ethan"){
-		background_music.openFromFile("../assets/audio/music/Ethans_song.wav");
+	if(name_p=="Whorl"){
+		background_music.openFromFile("../assets/audio/music/Whorl.wav");
 	}else{
 		std::cout<<"ERROR: invalid music name: "<<name_p<<std::endl;
 	}

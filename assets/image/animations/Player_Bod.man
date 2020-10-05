@@ -1,0 +1,2 @@
+Player_Bod_Idle:310x310,1r1c,1f
+Player_Bod_Death:310x310,1r5c,5f

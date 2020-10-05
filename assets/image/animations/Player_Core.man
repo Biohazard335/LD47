@@ -1,0 +1,5 @@
+Player_Core_Idle:178x166,1r1c,1f
+Player_Core_Look:178x166,1r7c,7f
+Player_Core_Blink:178x166,1r5c,5f
+Player_Core_Smile:178x166,1r7c,7f
+Player_Core_Ow:178x166,1r6c,5f

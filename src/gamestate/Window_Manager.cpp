@@ -9,7 +9,7 @@ Window_Manager::Window_Manager(){
 	set_execution_fps(60);
 	seed();
 	videomode= sf::VideoMode::getFullscreenModes().at(0);
-	window.create(videomode, "Core Engine", sf::Style::Fullscreen);
+	window.create(videomode, "Whorl", sf::Style::Fullscreen);
 	window.setVerticalSyncEnabled(true); 
 	window.setMouseCursorVisible(true);
 	window.setKeyRepeatEnabled(false);
@@ -17,6 +17,7 @@ Window_Manager::Window_Manager(){
 
 	Layer::set_new_resolution(window.getSize().x,window.getSize().y);
 	gamestate_manager.update_layer_resolutions();
+	window.setPosition(sf::Vector2i((sf::VideoMode::getDesktopMode().width/2)-(videomode.width/2),/*(sf::VideoMode::getDesktopMode().height/2)-(videomode.height/2)*/0));
 
 }
 
@@ -40,10 +41,10 @@ void Window_Manager::recieve_data(Data_Packet data_p){
 		videomode= sf::VideoMode(Layer::get_current_res_x(), Layer::get_current_res_y(), sf::VideoMode::getFullscreenModes().at(0).bitsPerPixel);
 		Duration_Check::start("changing resolution");
 		if(!Layer::is_fullscreen()){
-			window.create(videomode, "Core Engine", sf::Style::Close);
-			window.setPosition(sf::Vector2i((sf::VideoMode::getDesktopMode().width/2)-(videomode.width/2),(sf::VideoMode::getDesktopMode().height/2)-(videomode.height/2)));
+			window.create(videomode, "Whorl", sf::Style::Close);
+			window.setPosition(sf::Vector2i((sf::VideoMode::getDesktopMode().width/2)-(videomode.width/2),/*(sf::VideoMode::getDesktopMode().height/2)-(videomode.height/2)*/0));
 		}else{
-			window.create(videomode, "Core Engine", sf::Style::Fullscreen);
+			window.create(videomode, "Whorl", sf::Style::Fullscreen);
 		}
 		incorrect_window_size_counter=iws_counter_max;
 		gamestate_manager.update_layer_resolutions();

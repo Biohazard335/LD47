@@ -10,18 +10,21 @@ Sine_Bullet::Sine_Bullet(){
 	damage=5;
 	speed=5;
 	radius=5;
+	mod_speed=6;
+	mod_amount=0.5f;
 }
 
 void Sine_Bullet::update(){
-	if(exploding){
-		current_animation_int=1;
-		if(animations.at(1).is_finished()){
-			removing=true;
-		}
-		animate();
+	if(degrees>359){
+		degrees=0;
 	}else{
-		move();
+		degrees+=mod_speed;
 	}
+	Point mod=Point(sin_degrees(degrees),sin_degrees(degrees+90));
+	movement=direction+mod*mod_amount;
+	movement.normalize();
+	movement*=speed;
+	Bullet::update();
 }
 
 void Sine_Bullet::create(Point center_p, int radius_p, Point direction_p){
@@ -38,12 +41,14 @@ void Sine_Bullet::create(Point center_p, int radius_p, Point direction_p){
 
 
 
-Sine_Bullet Sine_Bullet::create_copy(Point center_p, int radius_p, Point direction_p){
+Sine_Bullet Sine_Bullet::create_copy(Point center_p, int radius_p, Point direction_p, Enemy* sender){
 	create(center_p,radius_p,direction_p);
+	this->sender = sender;
 	return *this;
 }
 
 Sine_Bullet Sine_Bullet::create_copy(Bullet_Blueprint b_p){
 	create(b_p.center,radius,b_p.direction);
+	this->sender = b_p.sender_;
 	return *this;
 }

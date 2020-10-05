@@ -1,0 +1,1 @@
+panel_idle:262x835,1r1c,1f
